@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block title %}Menú Principal{% endblock %}
+
+{% block content %}
+<style>
+    .hero {
+        background: #f8f9fa;
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .hero h1 {
+        font-size: 2.5rem;
+        color: #007bff;
+    }
+
+    .card-algoritmo {
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .card-algoritmo:hover {
+        transform: translateY(-5px);
+    }
+
+    .icono {
+        font-size: 3rem;
+        margin-bottom: 0.5rem;
+    }
+</style>
+
+<div class="mb-4">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark rounded">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="bi bi-search"></i> Algoritmos de Búsqueda</a>
+            <div class="d-flex">
+                <a class="btn btn-outline-light me-2" href="/buscar_nombre"><i class="bi bi-list"></i> Búsqueda Secuencial</a>
+                <a class="btn btn-outline-light" href="/buscar_id"><i class="bi bi-tree-fill"></i> Búsqueda Binaria</a>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="hero mb-5">
+    <h1><i class="bi bi-search"></i> Algoritmos de Búsqueda</h1>
+    <p class="lead">Explora y visualiza algoritmos de búsqueda secuencial y binaria con una interfaz interactiva.</p>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-md-5 mb-4">
+        <div class="card card-algoritmo border-primary">
+            <div class="card-body text-center">
+                <div class="icono text-primary"><i class="bi bi-list-task"></i></div>
+                <h5 class="card-title">Búsqueda Secuencial</h5>
+                <p class="card-text">Recorre la lista elemento por elemento hasta encontrar el valor buscado.<br><strong>Complejidad: O(n)</strong></p>
+                <a href="/buscar_nombre" class="btn btn-primary">Probar Búsqueda Secuencial</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5 mb-4">
+        <div class="card card-algoritmo border-success">
+            <div class="card-body text-center">
+                <div class="icono text-success"><i class="bi bi-tree-fill"></i></div>
+                <h5 class="card-title">Búsqueda Binaria</h5>
+                <p class="card-text">Divide la lista por la mitad en cada iteración.<br><strong>Complejidad: O(log n)</strong></p>
+                <a href="/buscar_id" class="btn btn-success">Probar Búsqueda Binaria</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

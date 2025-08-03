@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% block title %}Búsqueda Secuencial{% endblock %}
+
+{% block content %}
+<div class="mb-4 d-flex justify-content-between align-items-center">
+    <h2><i class="bi bi-list-task text-primary"></i> Búsqueda Secuencial</h2>
+    <a href="/" class="btn btn-outline-primary"><i class="bi bi-house-door"></i> Inicio</a>
+</div>
+
+<form method="POST" class="row g-2 mb-3">
+    <div class="col-md-6">
+        <input name="nombre" placeholder="Buscar Estudiante (Nombre)" class="form-control" value="{{ clave }}">
+    </div>
+    <div class="col-md-auto">
+        <button class="btn btn-primary"><i class="bi bi-search"></i> Buscar</button>
+    </div>
+</form>
+
+<div class="row">
+    <div class="col-md-8">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <i class="bi bi-table"></i> Lista de Estudiantes
+            </div>
+            <div class="card-body p-0">
+                <table class="table table-hover m-0 text-center">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Índice</th>
+                            <th>Nombre</th>
+                            <th>ID</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i, item, estado in resultados %}
+                            <tr class="
+                                {% if estado == 'Encontrado' %}table-success{%
+                                elif estado == 'Revisado' %}table-warning{%
+                                elif estado == 'No revisado' %}table-light{% endif %}">
+                                <td>{{ i }}</td>
+                                <td>{{ item.nombre }}</td>
+                                <td>{{ item.id }}</td>
+                                <td><span class="badge
+                                    {% if estado == 'Encontrado' %}bg-success{%
+                                    elif estado == 'Revisado' %}bg-warning text-dark{%
+                                    elif estado == 'No revisado' %}bg-secondary{% endif %}">
+                                    {{ estado }}</span></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        {# Muestra estos paneles solo si se ha intentado una búsqueda #}
+        {% if search_attempted %}
+        <div class="card shadow-sm mb-3">
+            <div class="card-header bg-secondary text-white">
+                <i class="bi bi-info-circle"></i> Resultados
+            </div>
+            <div class="card-body">
+                {# Encuentra el elemento con el estado 'Encontrado' #}
+                {% set found_item = resultados | selectattr(2, 'equalto', 'Encontrado') | first %}
+                
+                {% if found_item %}
+                    <p class="text-success fw-bold"><i class="bi bi-check-circle-fill"></i> ¡Elemento encontrado!</p>
+                    <p>Posición: <strong>{{ found_item[0] }}</strong></p>
+                    <p>Nombre: <strong>{{ found_item[1].nombre }}</strong></p>
+                {% else %}
+                    <p class="text-danger fw-bold"><i class="bi bi-x-circle-fill"></i> Elemento no encontrado.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white">
+                <i class="bi bi-eye"></i> Visualización
+            </div>
+            <div class="card-body">
+                <p><i class="bi bi-search"></i> Paso de Búsqueda:</p>
+                {% if found_item %}
+                    <p>Elementos revisados: <strong>{{ found_item[0] + 1 }}</strong></p>
+                    <p>Buscado: <strong>{{ clave }}</strong></p>
+                {% else %}
+                    <p>Buscado: <strong>{{ clave if clave else 'N/A' }}</strong></p>
+                    <p>Estado: No encontrado después de revisar todos los elementos.</p>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
