@@ -11,13 +11,15 @@ Este proyecto es una aplicación web desarrollada con Flask que permite realizar
 
 ## Menú En Ejecución
 
-![](Captura.png)
+![](captura.png)
 
-- Buscar por nombre: Ingresa "Ana" y verás si existe en la lista.
-![](Captura1.png)
+- Buscar por nombre: Ingresa "Sofía" y verás si existe en la lista.
+  
+![](captura1.png)
 
-- Buscar por ID: Ingresa "1003" y verás si existe en la lista ordenada.
-![](Captura2.png)
+- Buscar por ID: Ingresa "1005" y verás si existe en la lista ordenada.
+
+![](captura2.png)
 
 ## Instalación
 
@@ -61,5 +63,6 @@ Tema_7/
 - [Jinja2](https://jinja.palletsprojects.com/)
 
 ## Licencia
+
 
 Este proyecto se distribuye bajo la licencia MIT. Puedes usarlo, modificarlo y compartirlo
